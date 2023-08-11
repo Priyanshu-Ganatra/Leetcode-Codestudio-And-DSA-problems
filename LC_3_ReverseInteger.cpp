@@ -12,6 +12,7 @@ int main()
         int digit = x % 10;
         x /= 10;
 
+        // check for overflow and underflow condition for 32 bit signed integer 
         if ((ans > INT_MAX / 10) || (ans < INT_MIN / 10))
         {
             return 0;

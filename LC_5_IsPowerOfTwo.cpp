@@ -11,7 +11,6 @@ int main()
     int ans = 1;
     for (int i = 0; i <= 30; i++)
     {
-
         if (ans == n)
         {
             cout << "Yes";
@@ -28,4 +27,4 @@ int main()
 // this means the given number is a power of 2 because only 1 bit is set in the binary representation of a power of 2 number
 // and all other bits are 0 (0 is not a power of 2) and if we subtract 1 from a power of 2 number, all the bits are set except the
 // MSB bit which is 0, so if we do a bitwise AND of a power of 2 number and it's predecessor, the result will be 0, so we can use
-// this logic to check if the given number is a power of 2 or not. This logic is implemented in the next snippet.
+// this logic to check if the given number is a power of 2 or not. 

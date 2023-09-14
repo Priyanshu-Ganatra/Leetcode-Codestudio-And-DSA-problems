@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "sqroot": "python",
+        "ostream": "cpp",
+        "iostream": "cpp"
+    }
+}

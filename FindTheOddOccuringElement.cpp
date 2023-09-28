@@ -23,7 +23,7 @@ int findOddOccuringElement(int arr[], int n)
             }
         }
         else{ // even
-            if (mid+1 < n && arr[mid] == arr[mid+1])
+            if (mid+1 < n && arr[mid] == arr[mid+1]) // we are at the left part
             {
                 s = mid + 2; // go right
             }

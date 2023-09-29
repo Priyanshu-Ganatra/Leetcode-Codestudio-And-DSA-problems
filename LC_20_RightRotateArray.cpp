@@ -4,14 +4,18 @@ using namespace std;
 void rotate(vector<int> &nums, int k)
 {
     int n = nums.size();
-    vector<int> ans(n);
+    k = k % n;
+    // vector<int> ans(n);
 
-    for (int i = 0; i < n; i++)
-    {
-        int newi = (i + k) % n;
-        ans[newi] = nums[i];
-    }
-    nums = ans;
+    // for(int i = 0; i<n; i++){
+    //     int newi = (i+k)%n;
+    //     ans[newi] = nums[i];
+    // }
+    // nums = ans;
+
+    reverse(nums.begin(), nums.begin() + n - k);
+    reverse(nums.begin() + n - k, nums.begin() + n);
+    reverse(nums.begin(), nums.begin() + n);
 }
 
 int main()

@@ -2,7 +2,8 @@
 using namespace std;
 
 // vector<int> leftRotateBruteforceSolution(vector<int> arr, int d, int n) {
-//   // suppose d = 15, i.e. 7 + 7 + 1 we know that n rotations would always give us the original array back again
+//   // suppose d = 15, i.e. 7 + 7 + 1 we know that n rotations would always
+//   give us the original array back again
 //   // so to get rid of these useless operations
 //   // we do "d % n", so for d = 15 we only have to roate the array by 1
 //   d = d % n;
@@ -16,26 +17,24 @@ using namespace std;
 //   return arr;
 // }
 
-vector<int> leftRotateOptimalSolution(vector<int> passedArr, int d, int n)
+vector<int> leftRotateOptimalSolution(vector<int> arr, int d, int n)
 {
     // suppose d = 15, i.e. 7 + 7 + 1 we know that when d = n i.e. complete array
     // is rotated,
     // it results in the same array, so o get rid of these useless operations we
     // do %, so for d = 15 we only have to roate the array by 1
     d = d % n;
-    int *newArr = passedArr.data(); // make array from vector so reverse function could work (arr + d operation wouldn't work with vector)
-    reverse(newArr, newArr + d);
-    reverse(newArr + d, newArr + n);
-    reverse(newArr, newArr + n);
-    vector<int> ans(newArr, newArr + n); // converted the rotated array back to a vector
-    return ans;
+    reverse(arr.begin(), arr.begin() + d);
+    reverse(arr.begin() + d, arr.begin() + n);
+    reverse(arr.begin(), arr.begin() + n);
+    return arr;
 }
 
 vector<int> rotateArray(vector<int> arr, int d)
 {
     int n = arr.size();
-    //   return leftRotateBruteforceSolution(arr, d, n); // Brute - TC: O(n+d), SC: O(d) as temp array is created
-    return leftRotateOptimalSolution(arr, d, n); // Optimal - TC: O(2n), SC: O(1)
+    // return leftRotateBruteforceSolution(arr, d, n); // Brute - TC: O(n+d), SC: O(d) as temp array is created
+    return leftRotateOptimalSolution(arr, d, n);    // Optimal - TC: O(2n), SC: O(1)
 }
 
 int main()

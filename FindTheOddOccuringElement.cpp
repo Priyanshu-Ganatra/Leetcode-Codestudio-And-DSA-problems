@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// binary search problem - O(logn) time complexity and O(1) space complexity
 int findOddOccuringElement(int arr[], int n)
 {
     int s = 0, e = n -1;
@@ -14,7 +15,7 @@ int findOddOccuringElement(int arr[], int n)
 
         // checking mid - even or odd
         if (mid & 1){ // odd
-            if (mid-1 >= 0 && arr[mid-1] == arr[mid])
+            if (mid-1 >= 0 && arr[mid-1] == arr[mid]) // we are at the left part
             {
                 s = mid + 1; // go right
             }
@@ -25,7 +26,7 @@ int findOddOccuringElement(int arr[], int n)
         else{ // even
             if (mid+1 < n && arr[mid] == arr[mid+1]) // we are at the left part
             {
-                s = mid + 2; // go right
+                s = mid + 2; // go right, mid + 2 bcoz mid + 1 is the already checked element
             }
             else{
                 // either we are at the right part or on the answer that's why e = mid 
@@ -39,6 +40,7 @@ int findOddOccuringElement(int arr[], int n)
 
 int main()
 {
+    // indexes:  0  1  2  3  4  5  6  7   8   9   10
     int arr[] = {1, 1, 2, 2, 3, 3, 4, 50, 50, 65, 65};
     int n = sizeof(arr) / sizeof(arr[0]);
     cout << findOddOccuringElement(arr, n);

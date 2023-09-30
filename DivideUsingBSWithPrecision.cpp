@@ -28,16 +28,35 @@ int getQuotient(int divisor, int divident)
     return ans;
 }
 
+double getQuotientWithPrecision(int divisor, int divident)
+{
+    double quotient = getQuotient(divisor, divident);
+    double step = 0.1;
+    int precision = 10;
+
+    for (int i = 0; i < precision; i++)
+    {
+        double temp = quotient;
+        while (temp * divisor < divident)
+        {
+            quotient = temp;
+            temp += step;
+        }
+        step /= 10;
+    }
+    return quotient;
+}
+
 int main()
 {
-    int divisor = -5;
-    int divident = 20;
-    int ans = getQuotient(abs(divisor), abs(divident));
+    int divisor = -3;
+    int divident = 571;
+    double ans = getQuotientWithPrecision(abs(divisor), abs(divident));
 
     if ((divisor < 0 && divident > 0) || (divisor > 0 && divident < 0))
     {
         ans = -ans;
     }
-    cout << ans << endl;
+    printf("%.10f\n", ans);
     return 0;
 }

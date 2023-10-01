@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// tc: O(n*log(n)) | sc: O(m), where m = size of order string
 class Solution
 {
 public:

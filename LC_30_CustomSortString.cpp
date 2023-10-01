@@ -1,16 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Solution {
+class Solution
+{
 public:
-    static string str; 
+    static string str;
     // custom comparator
-    static bool compare(char ch1, char ch2){
-        // true when the position of ch1 in str < position of ch2 in str
-        return (str.find(ch1) < str.find(ch2)); 
+    static bool compare(char ch1, char ch2)
+    {
+        // true when position of ch1 in str < position of ch2 in given order string
+        return (str.find(ch1) < str.find(ch2));
+        // when true is returned, ch1 will be placed before ch2 in the o/p string else it'll be placed after ch2
     }
 
-    string customSortString(string order, string s) {
+    string customSortString(string order, string s)
+    {
         str = order;
         sort(s.begin(), s.end(), compare);
         return s;
@@ -19,7 +23,8 @@ public:
 
 string Solution::str;
 
-int main() {
+int main()
+{
     Solution solution;
     string order = "cba";
     string s = "abcd";

@@ -59,4 +59,10 @@ int findPairs(vector<int> &nums, int k)
     return ans.size();
 }
 
-i
+int main()
+{
+    vector<int> nums = {3, 1, 4, 1, 5};
+    int k = 2;
+    cout << findPairs(nums, k) << endl;
+    return 0;
+}

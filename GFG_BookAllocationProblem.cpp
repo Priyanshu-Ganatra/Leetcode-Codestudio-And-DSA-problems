@@ -58,6 +58,7 @@ int findPages(int A[], int N, int M)
 int main()
 {
     int t;
+    cout << "Enter the number of test cases: ";
     cin >> t;
     while (t--)
     {

@@ -1,9 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool isPalindrome(string &s, int start, int end){
-    while(start < end){
-        if(s[start] != s[end])
+bool isPalindrome(string &s, int start, int end)
+{
+    while (start < end)
+    {
+        if (s[start] != s[end])
             return false;
         start++;
         end--;
@@ -13,6 +15,7 @@ bool isPalindrome(string &s, int start, int end){
 
 string longestPalindrome(string s)
 {
+    // brute - tc: O(n^3) & sc: O(1), I'll implement the optimized DP based solution in the future
     string ans = "";
     for (int i = 0; i < s.size(); i++)
     {
@@ -24,7 +27,6 @@ string longestPalindrome(string s)
                 if (temp.size() > ans.size())
                     ans = temp;
             }
-            
         }
     }
     return ans;

@@ -19,7 +19,7 @@ int countPrimes(int n)
             while (j < n)
             {
                 prime[j] = false; // marking multiples of each number as non-prime
-                j += i;           // stepping by the number itself will gives its multiples
+                j += i;           // stepping by the number itself will give its multiples
             }
         }
     }

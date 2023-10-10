@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// linear search using recursion
 int search(int arr[], int n, int key, int index)
 {
     if (index == n)

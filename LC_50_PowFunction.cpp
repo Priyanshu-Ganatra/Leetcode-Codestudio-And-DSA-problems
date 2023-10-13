@@ -9,18 +9,18 @@ double myPow(double x, int n)
     {
         x = 1 / x;
     }
-    long num = labs(n);
-    double pow = 1;
-    while (num)
-    { // equivalent to while(num != 0)
-        if (num & 1)
-        { // equivalent to if((num & 1) != 0)
-            pow *= x;
+    long pow = labs(n); // this is done to handle the case when n = INT_MIN which will overflow if we try to convert it to positive
+    double ans = 1;
+    while (pow) 
+    {
+        if (pow & 1) // this finally assigns the precomputed value of x to ans when pow becomes 1 after all the right shifts
+        { 
+            ans *= x; 
         }
-        x *= x;
-        num >>= 1;
+        x *= x; // x = x^2
+        pow >>= 1; // pow = pow / 2
     }
-    return pow;
+    return ans;
 }
 
 int main()

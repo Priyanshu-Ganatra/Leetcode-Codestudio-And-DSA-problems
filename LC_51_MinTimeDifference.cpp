@@ -14,6 +14,7 @@ int minDiff(vector<int> &arr)
     return diff;
 }
 
+// tc: O(nlogn) + O(n) = O(nlogn), sc: O(n)
 int findMinDifference(vector<string> &timePoints)
 {
     int ans;
@@ -25,7 +26,8 @@ int findMinDifference(vector<string> &timePoints)
         time.push_back((hr * 60) + min);
     }
     sort(time.begin(), time.end());
-    return min(minDiff(time), ((1440) + time[0]) - time[time.size() - 1]);
+    // this will handle the case when the min difference is between the first and last element
+    return min(minDiff(time), ((1440) + time[0]) - time[time.size() - 1]); 
 }
 
 int main()

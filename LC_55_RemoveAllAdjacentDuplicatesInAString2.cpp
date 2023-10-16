@@ -43,11 +43,37 @@ using namespace std;
 //     return ans;
 // }
 
-// two pointer method. O(n) time and O(1) space.
+// two pointer method. O(n) time and O(n) space.
+string methodTwo(string &s, int &k)
+{
+    int i = 0, j = 0;
+    int n = s.length(); 
+    vector<int> count(n); // count[i] will store the count of char at i in s
+    while (j < n)
+    {
+        s[i] = s[j]; // copy char at j to i to remove duplicates in s in-place and i will point to the last char in s after removing duplicates
+        count[i] = 1; // count[i] will store the count of char at i in s and we are initializing it to 1 because we have one char at i in s now
+        if (i > 0 && s[i] == s[i - 1]) // this means we have one more char same as s[i - 1] in s 
+        {
+            count[i] += count[i - 1];
+        }
+        {
+            count[i] += count[i - 1];
+        }
+        // if count[i] == k, we need to remove k chars from s and i should be decremented by k to point to the last char in s after removing k chars
+        if (count[i] == k)
+        {
+            i -= k; // i is decremented by k to point to the last char in s after removing k chars
+        }
+        i++, j++; // increment i and j to point to next char in s
+    }
+    return s.substr(0, i); // this is because i is pointing to the last char in s after removing duplicates
+}
 
 string removeDuplicates(string s, int k)
 {
     // return methodOne(s, k);
+    return methodTwo(s, k);
 }
 
 int main()

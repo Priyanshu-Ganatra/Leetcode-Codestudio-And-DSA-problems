@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// tc : O(n) & sc : O(n)
+// tc : O(n) & sc : O(n) to be precise tc: T(n/2 + 1) & sc : T(n/2 + 1)
 void reverse(string &str, int s, int e){
     if(s >= e){
         return;

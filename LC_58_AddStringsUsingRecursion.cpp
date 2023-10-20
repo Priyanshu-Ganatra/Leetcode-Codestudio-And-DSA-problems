@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// this will calculate the sum of two strings using recursion in reverse order
 void addRE(string &num1, int p1, string &num2, int p2, string &ans, int carry = 0)
 {
     // base case

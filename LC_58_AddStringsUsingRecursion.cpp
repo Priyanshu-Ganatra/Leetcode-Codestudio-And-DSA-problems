@@ -27,6 +27,8 @@ void addRE(string &num1, int p1, string &num2, int p2, string &ans, int carry = 
     addRE(num1, p1 - 1, num2, p2 - 1, ans, carry);
 }
 
+// tc: Θ(n+1*k) where n is the length of the longest string and k is the number of recursive calls
+// sc: Θ(n+1*m)
 string addStrings(string num1, string num2)
 {
     string ans = "";

@@ -20,6 +20,7 @@ int solve(vector<int> &nums, int n, int idx)
 }
 
 // recursive solution, gives TLE on leetcode. we'll use DP to optimize it in future
+// tc: O(2^n) sc: O(n)
 int rob(vector<int> &nums)
 {
     int n = nums.size();

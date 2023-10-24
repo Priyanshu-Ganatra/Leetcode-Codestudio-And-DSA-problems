@@ -25,7 +25,7 @@ int partitionArray(int input[], int start, int end)
 
 void quickSort(int input[], int start, int end)
 {
-    if (start < end)
+    if (start < end) // base case, if start == end, then there is only one element in the array, so no need to sort
     {
         int pIndex = partitionArray(input, start, end);
         quickSort(input, start, pIndex - 1);

@@ -2,7 +2,6 @@
 using namespace std;
 
 // gives TLE for large inputs, we'll use DP to optimize it in future
-// copilot is trained on some wild data💀💀
 int numRollsToTarget(int n, int k, int target)
 {
     // base cases

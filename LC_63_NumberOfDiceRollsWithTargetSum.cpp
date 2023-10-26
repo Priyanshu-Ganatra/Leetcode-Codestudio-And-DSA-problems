@@ -23,5 +23,9 @@ int numRollsToTarget(int n, int k, int target)
 
 int main()
 {
+    int n, k, target;
+    cin >> n >> k >> target;
+    cout << "Number of ways to get target sum " << target << " with " << n << " dices of " << k << " faces is: ";
+    cout << numRollsToTarget(n, k, target) << endl;
     return 0;
 }

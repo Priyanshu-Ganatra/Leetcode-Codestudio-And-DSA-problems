@@ -40,39 +40,45 @@ void print(ListNode *head)
     }
 }
 
+// Floyd's Cycle Detection Algorithm (Tortoise and Hare Algorithm) - tc: O(n), sc: O(1)
 ListNode *detectCycle(ListNode *head)
 {
-    // Initialize two pointers, slow and fast, to the head of the linked list.
     ListNode *slow = head;
     ListNode *fast = head;
 
-    // Move the slow pointer one step and the fast pointer two steps at a time
-    // through the linked list,
-    // until they either meet or the fast pointer reaches the end of the list.
-    while (fast && fast->next)
+    while (fast != NULL)
     {
-        slow = slow->next;
-        fast = fast->next->next;
-        if (slow == fast)
+        fast = fast->next;
+        if (fast != NULL)
         {
-            // If the pointers meet, there is a cycle in the linked list.
-            // Reset the slow pointer to the head of the linked list, and move both
-            // pointers one step at a time
-            // until they meet again. The node where they meet is the starting point
-            // of the cycle.
-            slow = head;
-            while (slow != fast)
-            {
-                slow = slow->next;
-                fast = fast->next;
-            }
-            return slow;
+            fast = fast->next;
+            slow = slow->next;
+        }
+        // check for loop
+        if (fast == slow)
+        {
+            break;
         }
     }
 
-    // If the fast pointer reaches the end of the list without meeting the slow
-    // pointer, there is no cycle in the linked list. Return nullptr.
-    return nullptr;
+    // if no loop th
+    if(fast == NULL)
+    {
+        return NULL;
+    }
+
+    // here the pointers meet
+    slow = head;
+
+    // move slow and fast -> 1 step
+    while (fast != slow)
+    {
+        fast = fast->next;
+        slow = slow->next;
+    }
+
+    // return starting point
+    return slow;
 }
 
 int main()

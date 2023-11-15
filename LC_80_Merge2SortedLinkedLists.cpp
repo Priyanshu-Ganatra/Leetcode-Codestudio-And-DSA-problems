@@ -40,20 +40,41 @@ void print(ListNode *head)
     }
 }
 
+// using dummy node approach - O(n) time, O(1) space
 ListNode *mergeTwoLists(ListNode *l1, ListNode *l2)
 {
     if (l1 == NULL)
         return l2;
     if (l2 == NULL)
         return l1;
-    if (l1->val >= l2->val)
-        l2->next = mergeTwoLists(l1, l2->next);
-    else
+    
+    ListNode *ans = new ListNode(-1); // dummy node
+    ListNode *mptr = ans; // merge pointer
+     
+    while (l1 && l2) // while both lists are not empty
     {
-        l1->next = mergeTwoLists(l1->next, l2);
-        l2 = l1;
+        if (l1->val <= l2->val) // if l1's value is smaller
+        {
+            mptr->next = l1; // point merge pointer to l1
+            mptr = l1; // move merge pointer to l1
+            l1 = l1->next; // move l1 to next node
+        }
+        else // if l2's value is smaller
+        {
+            mptr->next = l2; // point merge pointer to l2
+            mptr = l2; // move merge pointer to l2
+            l2 = l2->next; // move l2 to next node
+        }
     }
-    return l2;
+    if(l1) // if l1 is not empty but l2 is empty
+    {
+        mptr->next = l1; // point merge pointer to l1
+    }
+    if(l2) // if l2 is not empty but l1 is empty
+    {
+        mptr->next = l2; // point merge pointer to l2
+    }
+    return ans->next; // return the merged list
 }
 
 int main()
@@ -74,7 +95,7 @@ int main()
     insertAtHead(head2, tail2, 4);
     insertAtHead(head2, tail2, 3);
     insertAtHead(head2, tail2, 1);
-    cout << "List 2: ";
+    cout << "List 2: "; 
     print(head2);
     cout << endl;
 

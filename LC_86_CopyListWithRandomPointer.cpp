@@ -20,25 +20,57 @@ public:
 };
 
 // tc - O(n) & sc - O(n)
-Node *oldHelper(Node *head, unordered_map<Node *, Node *> &mp)
-{
-    if (head == nullptr)
-        return nullptr;
+// Node *oldHelper(Node *head, unordered_map<Node *, Node *> &mp)
+// {
+//     if (head == nullptr)
+//         return nullptr;
 
-    Node *newHead = new Node(head->val);
-    mp[head] = newHead;
-    newHead->next = oldHelper(head->next, mp);
-    if (head->random)
-    {
-        newHead->random = mp[head->random];
-    }
-    return newHead;
-}
+//     Node *newHead = new Node(head->val);
+//     mp[head] = newHead;
+//     newHead->next = oldHelper(head->next, mp);
+//     if (head->random)
+//     {
+//         newHead->random = mp[head->random];
+//     }
+//     return newHead;
+// }
 
 Node *copyRandomList(Node *head)
 {
     unordered_map<Node *, Node *> mp;
-    return oldHelper(head, mp);
+    // return oldHelper(head, mp);
+
+    // tc - O(n) & sc - O(1). 
+    // Changing the original LL in which each new node (with the copied value) is inserted after the old node with the same value.
+    if(!head) return nullptr;
+
+    // step1: clone A -> A' 
+    Node *it = head; // iterator for original LL
+    while(it){
+        Node *clonedNode = new Node(it->val);
+        clonedNode->next = it->next;
+        it->next = clonedNode;
+        it = it->next->next;
+    }
+
+    // step2: assign random pointers of A' with the help of A
+    it = head;
+    while(it){
+        Node *clonedNode = it->next;
+        clonedNode -> random = it -> random ? it -> random -> next : nullptr;
+        it = it -> next -> next;
+    }
+
+    // step3: detach A' from A
+    it = head;
+    Node *clonedHead = it -> next;
+    while(it){
+        Node *clonedNode = it -> next;
+        it -> next = clonedNode -> next;
+        clonedNode -> next = clonedNode -> next ? clonedNode -> next -> next : nullptr;
+        it = it -> next;
+    }
+    return clonedHead;
 }
 
 // Function to print the linked list

@@ -31,6 +31,18 @@ void insertAtHead(ListNode *&head, ListNode *&tail, int data)
     }
 }
 
+int getLength(ListNode *head)
+{
+    int len = 0;
+    ListNode *temp = head;
+    while (temp != NULL)
+    {
+        len++;
+        temp = temp->next;
+    }
+    return len;
+}
+
 void print(ListNode *head)
 {
     ListNode *temp = head;
@@ -88,20 +100,72 @@ bool compareLists(ListNode *head1, ListNode *head2)
     return true;
 }
 
+// By breaking list in 2 halves
 // tc: O(n), sc: O(1)
+// bool isPalindrome(ListNode *head)
+// {
+//     // break the LL into two halves
+//     ListNode *mid = middleNode(head); // mid is the tail of first half
+//     ListNode *head2 = mid->next; // head of second half
+//     mid->next = NULL; // break the link between first and second half because we need to reverse the second half
+
+//     // reverse the second half of LL
+//     head2 = reverseList(head2);
+
+//     // compare the two halves
+//     bool ans = compareLists(head, head2);
+//     return ans;
+// }
+
+// By using stack
+// tc: O(n), sc: O(n)
 bool isPalindrome(ListNode *head)
 {
-    // break the LL into two halves
-    ListNode *mid = middleNode(head); // mid is the tail of first half
-    ListNode *head2 = mid->next; // head of second half
-    mid->next = NULL; // break the link between first and second half because we need to reverse the second half
+    // geting mid node, but in case of even length, we need to take the the previous node to the conventional mid node
+    // eg: 1->2->3->4, by convention, we get mid node as 3, but we need 2 here as mid node
+    ListNode *slow = NULL;
+    ListNode *fast = NULL;
+    if (getLength(head) & 1) // odd length
+    { 
+        slow = head;
+        fast = head;
+    }
+    // even length, here we need to take the previous node to the conventional mid node that why we are initializing fast with head->next
+    else 
+    {
+        slow = head;
+        fast = head->next;
+    }
 
-    // reverse the second half of LL
-    head2 = reverseList(head2);
+    while (fast->next != NULL)
+    {
+        fast = fast->next;
+        if (fast->next != NULL)
+        {
+            fast = fast->next;
+            slow = slow->next;
+        }
+    }
 
-    // compare the two halves
-    bool ans = compareLists(head, head2);
-    return ans;
+    ListNode *mid = slow;
+    ListNode *temp = mid->next;
+    stack<int> st;
+    while (temp)
+    {
+        st.push(temp->val);
+        temp = temp->next;
+    }
+    ListNode *it = head;
+    while (!st.empty())
+    {
+        if (it->val != st.top())
+        {
+            return false;
+        }
+        st.pop();
+        it = it->next;
+    }
+    return true;
 }
 
 int main()

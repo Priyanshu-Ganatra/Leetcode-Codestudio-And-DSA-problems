@@ -13,20 +13,20 @@ bool findRedundantBrackets(string &s)
         }
         else if (ch == ')')
         {
-            int opCount = 0;
+            bool isOpPresent = 0;
             while (!st.empty() && st.top() != '(')
             {
                 char temp = st.top();
                 if (temp == '+' || temp == '-' || temp == '*' || temp == '/')
                 {
-                    opCount++;
+                    isOpPresent = 1;
                 }
                 st.pop();
             }
             // here either stack has become empty or its top has '('
             st.pop(); // remove the '('
 
-            if (opCount == 0)
+            if (!isOpPresent)
             {
                 return true;
             }

@@ -41,6 +41,7 @@ vector<int> prevSmallerElement(vector<int> &arr, int n)
     return ans;
 }
 
+// tc : O(n) and sc: O(n)
 int largestRectangleArea(vector<int> &heights)
 {
     int size = heights.size();
@@ -68,4 +69,11 @@ int largestRectangleArea(vector<int> &heights)
         maxi = max(maxi, area[i]);
     }
     return maxi;
+}
+
+int main()
+{
+    vector<int> heights = {2, 1, 5, 6, 2, 3};
+    cout << largestRectangleArea(heights) << endl;
+    return 0;
 }

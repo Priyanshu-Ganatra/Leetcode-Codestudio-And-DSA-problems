@@ -143,14 +143,27 @@ ListNode *swapNodes(ListNode *head, int k)
     }
 }
 
-ListNode *createLinkedList()
+int main()
 {
-    ListNode *head = new ListNode(1);
-    ListNode *second = new ListNode(2);
-    ListNode *third = new ListNode(3);
-    ListNode *fourth = new ListNode(4);
-    ListNode *fifth = new ListNode(5);
-    cout << "LL befo"
-    swapNodes(head, 2);
-    return head;
+    ListNode *head = NULL;
+    ListNode *tail = NULL;
+
+    insertAtHead(head, tail, 7);
+    insertAtHead(head, tail, 6);
+    insertAtHead(head, tail, 5);
+    insertAtHead(head, tail, 4);
+    insertAtHead(head, tail, 3);
+    insertAtHead(head, tail, 2);
+    insertAtHead(head, tail, 1);
+
+    cout << "Original LL: ";
+    print(head);
+    cout << endl;
+
+    cout << "Swapped LL: ";
+    ListNode *newHead = swapNodes(head, 2);
+    print(newHead);
+    cout << endl;
+
+    return 0;
 }

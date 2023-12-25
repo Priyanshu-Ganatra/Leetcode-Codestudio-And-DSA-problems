@@ -11,17 +11,16 @@ struct TreeNode
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-int searchInorder(vector<int> &inorder, int &size, int &target)
+// create a mapping of inorder elements with their indices for faster search
+void createMapping(vector<int> &inorder, int &size, unordered_map<int, int> &mapping)
 {
     for (int i = 0; i < size; i++)
     {
-        if (inorder[i] == target)
-            return i;
+        mapping[inorder[i]] = i;
     }
-    return -1;
 }
 
-TreeNode *solve(vector<int> &preorder, vector<int> &inorder, int &preIndex, int inStartIndex, int inEndIndex, int &size)
+TreeNode *solve(vector<int> &preorder, vector<int> &inorder, int &preIndex, int inStartIndex, int inEndIndex, int &size, unordered_map<int, int> &mapping)
 {
     // base case
     if (preIndex >= size || inStartIndex > inEndIndex)
@@ -29,24 +28,29 @@ TreeNode *solve(vector<int> &preorder, vector<int> &inorder, int &preIndex, int 
         return NULL;
     }
 
-    // one case
+    // solving one case
     int elem = preorder[preIndex];
     preIndex++;
     TreeNode *root = new TreeNode(elem);
     // search this elem in in-order
-    int pos = searchInorder(inorder, size, elem);
+    int pos = mapping[elem];
 
     // recursion
-    root->left = solve(preorder, inorder, preIndex, inStartIndex, pos - 1, size);
-    root->right = solve(preorder, inorder, preIndex, pos + 1, inEndIndex, size);
+    // left subtree will be from inStartIndex to pos - 1 in inorder as pos is the current root
+    root->left = solve(preorder, inorder, preIndex, inStartIndex, pos - 1, size, mapping);
+    // right subtree will be from pos + 1 to inEndIndex in inorder as pos is the current root 
+    root->right = solve(preorder, inorder, preIndex, pos + 1, inEndIndex, size, mapping);
     return root;
 }
 
+// tc : O(n) + O(n) = O(n) for creating mapping and solving and sc : O(n) for mapping and O(h) for recursion stack = O(n)
 TreeNode *buildTree(vector<int> &preorder, vector<int> &inorder)
 {
     int size = preorder.size();
+    unordered_map<int, int> mapping; // mapping of inorder elements with their indices
+    createMapping(inorder, size, mapping); // create mapping
     int preIndex = 0, inStartIndex = 0, inEndIndex = inorder.size() - 1;
-    return solve(preorder, inorder, preIndex, inStartIndex, inEndIndex, size);
+    return solve(preorder, inorder, preIndex, inStartIndex, inEndIndex, size, mapping);
 }
 
 TreeNode *preOrderTraversal(TreeNode *root)

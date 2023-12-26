@@ -25,7 +25,7 @@ public:
 
     //     int leftHeight = maxDepth(root->left);
     //     int rightHeight = maxDepth(root->right);
-    //     int height = max(leftHeight, rightHeight) + 1;
+    //     int height = max(leftHeight, rightHeight) + 1; // +1 for root node
     //     return height;
     // }
 

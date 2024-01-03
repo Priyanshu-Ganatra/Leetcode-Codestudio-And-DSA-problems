@@ -14,6 +14,28 @@ public:
     }
 };
 
+int minValue(Node *root)
+{
+    if (root == NULL)
+        return -1;
+    while (root->left != NULL)
+    {
+        root = root->left;
+    }
+    return root->data;
+}
+
+int maxValue(Node *root)
+{
+    if (root == NULL)
+        return -1;
+    while (root->right != NULL)
+    {
+        root = root->right;
+    }
+    return root->data;
+}
+
 vector<vector<int>> levelOrder(Node *root)
 {
     vector<vector<int>> ans;
@@ -86,6 +108,61 @@ Node *insertIntoBST(Node *root, int val)
     return root;
 }
 
+Node *deleteInBST(Node *root, int key)
+{
+    if (root == NULL)
+        return NULL;
+    if (root->data == key)
+    {
+        // delete node
+        // 4 cases
+
+        // 1. node is leaf node
+        if (root->left == NULL && root->right == NULL)
+        {
+            delete root;
+            return NULL;
+        }
+        // 2. node has right child
+        else if (root->left == NULL)
+        {
+            Node *rightChild = root->right;
+            delete root;
+            return rightChild;
+        }
+        // 3. node has left child
+        else if (root->right == NULL)
+        {
+            Node *leftChild = root->left;
+            delete root;
+            return leftChild;
+        }
+        // 4. node has both children
+        else
+        {
+            // get max value from left subtree
+            int leftMax = maxValue(root->left);
+            // replace root value with leftMax
+            root->data = leftMax;
+            // delete leftMax from left subtree
+            root->left = deleteInBST(root->left, leftMax);
+            return root;
+        }
+    }
+    else if (root->data > key)
+    {
+        // go to left subtree
+        root->left = deleteInBST(root->left, key);
+    }
+    else
+    {
+        // go to right subtree
+        root->right = deleteInBST(root->right, key);
+    }
+
+    return root;
+}
+
 void createBST(Node *&root)
 {
     cout << "Enter data: " << endl;
@@ -98,28 +175,6 @@ void createBST(Node *&root)
         cout << "Enter data: " << endl;
         cin >> data;
     }
-}
-
-int minValue(Node *root)
-{
-    if (root == NULL)
-        return -1;
-    while (root->left != NULL)
-    {
-        root = root->left;
-    }
-    return root->data;
-}
-
-int maxValue(Node *root)
-{
-    if (root == NULL)
-        return -1;
-    while (root->right != NULL)
-    {
-        root = root->right;
-    }
-    return root->data;
 }
 
 // best case: time = O(logn) and space: O(logn)
@@ -173,5 +228,10 @@ int main()
         cout << "Found" << endl;
     else
         cout << "Not Found" << endl;
+    cout << "Enter number to delete: ";
+    cin >> t;
+    root = deleteInBST(root, t);
+    cout << "Inorder Traversal after deletion: ";
+    inOrder(root);
     return 0;
 }

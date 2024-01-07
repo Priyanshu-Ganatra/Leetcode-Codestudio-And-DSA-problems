@@ -194,6 +194,18 @@ bool searchInBST(Node *root, int key)
         return searchInBST(root->right, key);
 }
 
+// time: O(n) and space: O(n)
+Node *BSTFromInorder(vector<int> &inorder, int start, int end)
+{
+    if (start > end)
+        return NULL;
+    int mid = (start + end) / 2;
+    Node *root = new Node(inorder[mid]);
+    root->left = BSTFromInorder(inorder, start, mid - 1);
+    root->right = BSTFromInorder(inorder, mid + 1, end);
+    return root;
+}
+
 int main()
 {
     Node *root = NULL;

@@ -51,4 +51,27 @@ vector<int> merge(Node *root1, Node *root2)
     return ans;
 }
 
-// main func
+int main()
+{
+    // input
+    // 1st bst
+    Node *root1 = new Node(100);
+    root1->left = new Node(50);
+    root1->right = new Node(300);
+    root1->left->left = new Node(20);
+    root1->left->right = new Node(70);
+
+    // 2nd bst
+    Node *root2 = new Node(80);
+    root2->left = new Node(40);
+    root2->right = new Node(120);
+
+    // output
+    auto ans = merge(root1, root2);
+    cout << "Merged BST :" << endl;
+    for (auto x : ans)
+        cout << x << " ";
+    cout << "\n";
+
+    return 0;
+}

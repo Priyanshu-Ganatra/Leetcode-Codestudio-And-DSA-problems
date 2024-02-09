@@ -84,8 +84,9 @@ public:
         return ans;
     }
 
-    // O(n) - this method corrects the heap property of the array
-    void heapify(vector<int> &arr, int n, int index){
+    // O(logn) - this method corrects the heap property of the array
+    void heapify(vector<int> &arr, int n, int index)
+    {
         int leftIndex = 2 * index;
         int rightIndex = 2 * index + 1;
         int maxIndex = index;
@@ -111,36 +112,62 @@ public:
     }
 };
 
+// tc - O(n) and sc - O(1)
+void buildHeap(vector<int> &arr, int n)
+{
+    MaxHeap h(n);
+    for (int i = n / 2; i > 0; i--)
+    {
+        h.heapify(arr, n, i);
+    }
+}
+
 int main()
 {
-    MaxHeap h(10);
-    h.insert(10);
-    h.insert(20);
-    h.insert(30);
-    h.insert(40);
+    // MaxHeap h(10);
+    // h.insert(10);
+    // h.insert(20);
+    // h.insert(30);
+    // h.insert(40);
 
-    cout << "Printing heap before deletion:" << endl;
-    for (int i = 1; i <= h.size; i++)
-    {
-        cout << h.arr[i] << " ";
-    }
-    int deletedElem = h.deleteNode();
-    cout << endl << "Deleting element: " << deletedElem << endl;
-    cout << "Printing heap after deletion:" << endl;
-    for (int i = 1; i <= h.size; i++)
-    {
-        cout << h.arr[i] << " ";
-    }
-    cout << endl;
-    cout << "Heapify this incorrect heap:" << endl;
-    vector<int> v = {0, 45, 50, 60, 40, 30, 20};
-    for (int i = 1; i <= 6; i++)
+    // cout << "Printing heap before deletion:" << endl;
+    // for (int i = 1; i <= h.size; i++)
+    // {
+    //     cout << h.arr[i] << " ";
+    // }
+    // int deletedElem = h.deleteNode();
+    // cout << endl
+    //      << "Deleting element: " << deletedElem << endl;
+    // cout << "Printing heap after deletion:" << endl;
+    // for (int i = 1; i <= h.size; i++)
+    // {
+    //     cout << h.arr[i] << " ";
+    // }
+    // cout << endl;
+    // cout << "Heapify this incorrect heap:" << endl;
+    // vector<int> v = {0, 45, 50, 60, 40, 30, 20};
+    // for (int i = 1; i <= 6; i++)
+    // {
+    //     cout << v[i] << " ";
+    // }
+    // h.heapify(v, 4, 1);
+    // cout << endl
+    //      << "Printing array after heapify:" << endl;
+    // for (int i = 1; i <= 6; i++)
+    // {
+    //     cout << v[i] << " ";
+    // }
+
+    vector<int> v{0, 5, 10, 20};
+    int n = v.size() - 1;
+    cout << "Array before making it a heap: " << endl;
+    for (int i = 1; i <= n; i++)
     {
         cout << v[i] << " ";
     }
-    h.heapify(v, 4, 1);
-    cout << endl << "Printing array after heapify:" << endl;
-    for (int i = 1; i <= 6; i++)
+    buildHeap(v, n);
+    cout << "\nArray after making it a heap: " << endl;
+    for (int i = 1; i <= n; i++)
     {
         cout << v[i] << " ";
     }

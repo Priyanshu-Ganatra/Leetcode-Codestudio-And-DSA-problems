@@ -122,8 +122,26 @@ void buildHeap(vector<int> &arr, int n)
     }
 }
 
+// tc : O(nlogn)
+void heapSort(vector<int> &arr, int n){
+    MaxHeap h(n);
+    buildHeap(arr, n);
+    cout << "Array after making it a heap: " << endl;
+    for (int i = 1; i <= n; i++)
+    {
+        cout << arr[i] << " ";
+    }
+    while (n != 1)
+    {
+        swap(arr[1], arr[n]);
+        n--;
+        h.heapify(arr, n, 1);
+    }
+}
+
 int main()
 {
+    // ---------- Insert, delete, heapify ----------
     // MaxHeap h(10);
     // h.insert(10);
     // h.insert(20);
@@ -158,7 +176,8 @@ int main()
     //     cout << v[i] << " ";
     // }
 
-    vector<int> v{0, 5, 10, 20};
+    // ---------- Array to heap ----------
+    vector<int> v{0, 5, 10, 20, 18, 3, 2, 1, 6, 7};
     int n = v.size() - 1;
     cout << "Array before making it a heap: " << endl;
     for (int i = 1; i <= n; i++)
@@ -171,5 +190,15 @@ int main()
     {
         cout << v[i] << " ";
     }
+
+    // ---------- HeapSort ----------
+    // vector<int> v{0, 20, 5, 3, 10, 2, 1};
+    // int n = v.size() - 1;
+    // heapSort(v, n);
+    // cout << "\nArray after sorting: " << endl;
+    // for (int i = 1; i <= n; i++)
+    // {
+    //     cout << v[i] << " ";
+    // }
     return 0;
 }

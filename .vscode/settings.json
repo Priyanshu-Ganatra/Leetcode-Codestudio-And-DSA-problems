@@ -3,6 +3,11 @@
         "sqroot": "python",
         "ostream": "cpp",
         "iostream": "cpp",
-        "span": "cpp"
+        "span": "cpp",
+        "array": "cpp",
+        "any": "cpp",
+        "string_view": "cpp",
+        "ranges": "cpp",
+        "regex": "cpp"
     }
 }

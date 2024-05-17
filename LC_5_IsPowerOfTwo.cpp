@@ -1,30 +1,49 @@
-#include <iostream>
-#include <math.h>
+#include <bits/stdc++.h>
 using namespace std;
+
+class Solution
+{
+public:
+    // tc : O(logn) sc : O(1)
+    // bool isPowerOfTwo(int n)
+    // {
+    //     if (n == 0)
+    //         return false;
+    //     while (n % 2 == 0)
+    //         n /= 2;
+    //     return n == 1;
+    // }
+
+    // tc : O(logn) sc : O(1)
+    // bool isPowerOfTwo(int n)
+    // {
+    //     int count = 0;
+    //     while (n > 0)
+    //     {
+    //         int lastBit = n & 1;
+    //         if (lastBit == 1)
+    //             count++;
+    //         n >>= 1;
+    //     }
+
+    //     return count == 1;
+    // }
+
+    // tc : O(1) sc : O(1)
+    bool isPowerOfTwo(int n)
+    {
+        if (n == 0) 
+            return false;
+        return (n & (n - 1)) == 0;
+    }
+
+};
 
 int main()
 {
-    int n;
-    cout << "Enter a number to check if it's a power of 2: " << endl;
-    cin >> n;
-
-    int ans = 1;
-    for (int i = 0; i <= 30; i++)
-    {
-        if (ans == n)
-        {
-            cout << "Yes";
-            return 0;
-        }
-        if (ans < INT_MAX / 2)
-            ans *= 2;
-    }
-    cout << "No";
+    Solution sol;
+    cout << sol.isPowerOfTwo(1) << endl;
+    cout << sol.isPowerOfTwo(16) << endl;
+    cout << sol.isPowerOfTwo(218) << endl;
     return 0;
 }
-
-// Second logic could be to check if the number of set bits in the given number is 1,
-// this means the given number is a power of 2 because only 1 bit is set in the binary representation of a power of 2 number
-// and all other bits are 0 (0 is not a power of 2) and if we subtract 1 from a power of 2 number, all the bits are set except the
-// MSB bit which is 0, so if we do a bitwise AND of a power of 2 number and it's predecessor, the result will be 0, so we can use
-// this logic to check if the given number is a power of 2 or not. 

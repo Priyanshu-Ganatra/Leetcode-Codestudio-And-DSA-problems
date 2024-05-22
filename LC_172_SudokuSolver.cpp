@@ -20,7 +20,9 @@ public:
                 return false;
 
             // 3*3 box check
-            if (board[3 * (row / 3) + (i / 3)][3 * (col / 3) + (i % 3)] == value)
+            int startRow = 3 * (row / 3);
+            int startCol = 3 * (col / 3);
+            if (board[startRow + (i / 3)][startCol + (i % 3)] == value)
                 return false;
         }
         // place is safe

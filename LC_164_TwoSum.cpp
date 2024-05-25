@@ -39,23 +39,33 @@ public:
     }
 
     // tc : O(n) & sc : O(n)
-    vector<int> twoSum(vector<int> &nums, int target)
-    {
-        unordered_map<int, int> numMap;
-        int n = nums.size();
+    // vector<int> twoSum(vector<int>& nums, int target) {
+    //     unordered_map<int, int> numMap;
+    //     int n = nums.size();
 
-        for (int i = 0; i < n; i++)
-        {
-            int complement = target - nums[i];
-            if (numMap.count(complement))
-            {
-                return {numMap[complement], i};
-            }
-            numMap[nums[i]] = i;
-        }
+    //     for (int i = 0; i < n; i++) {
+    //         int complement = target - nums[i];
+    //         if (numMap.count(complement)) {
+    //             return {numMap[complement], i};
+    //         }
+    //         numMap[nums[i]] = i;
+    //     }
 
-        return {}; // No solution found
-    }
+    //     return {}; // No solution found
+    // }
+
+    // tc: O(n^2) & sc: O(1)
+    // vector<int> twoSum(vector<int>& nums, int target) {
+    //     int n = nums.size();
+    //     for(int i = 0; i<n; i++){
+    //         for(int j = 0; j<n; j++){
+    //             if(i == j) continue;
+
+    //             if(nums[i] + nums[j] == target) return {i, j};
+    //         }
+    //     }
+    //     return {};
+    // }
 };
 
 int main()

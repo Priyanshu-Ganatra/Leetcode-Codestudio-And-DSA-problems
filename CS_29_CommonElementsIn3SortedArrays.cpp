@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// tc : O(n1 + n2 + n3) sc : O(min(n1 + n2 + n3))
 vector<int> findCommonElements(vector<int> &a, vector<int> &b, vector<int> &c)
 {
     vector<int> ans;

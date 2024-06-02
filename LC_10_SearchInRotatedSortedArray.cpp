@@ -17,7 +17,7 @@ public:
     }
 
     int search(vector<int>& nums, int target) {
-        auto max_idx = max_element(nums.begin(), nums.end());
+        vector<int>::iterator max_idx = max_element(nums.begin(), nums.end());
         int pivot = std::distance(nums.begin(), max_idx);
 
         if (nums[0] <= target && target <= nums[pivot]) {
@@ -30,7 +30,14 @@ public:
 
 int main() {
     Solution s;
-    vector<int> nums = {4, 5, 6, 7, 0, 1, 2};
+    vector<int> nums;
+    nums.push_back(4);
+    nums.push_back(5);
+    nums.push_back(6);
+    nums.push_back(7);
+    nums.push_back(0);
+    nums.push_back(1);
+    nums.push_back(2);
     int target = 0;
     cout << s.search(nums, target) << endl;
     return 0;

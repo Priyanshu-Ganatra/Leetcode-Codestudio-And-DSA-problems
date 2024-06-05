@@ -25,7 +25,7 @@ int bs(vector<int> &nums, int start, int x)
 
 int findPairs(vector<int> &nums, int k)
 {
-    // 2 pointers, tc(n*logn) & sc: O(n^2)
+    // 2 pointers, tc(n*logn) & sc: O(n)
     // sort(nums.begin(), nums.end());
     // set<pair<int,int>> ans;
     // int i = 0, j = 1;
@@ -45,7 +45,7 @@ int findPairs(vector<int> &nums, int k)
     // }
     // return ans.size();
 
-    // binary search, tc: O(n*logn) & sc: O(n^2
+    // binary search, tc: O(n*logn) & sc: O(n)
     sort(nums.begin(), nums.end());
     set<pair<int, int>> ans;
 

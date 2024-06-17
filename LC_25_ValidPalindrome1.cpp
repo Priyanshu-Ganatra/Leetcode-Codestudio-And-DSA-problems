@@ -1,22 +1,25 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool f(int i, string &str)
-{
-    if (i >= str.size() / 2)
-        return true;
-    if (str[i] != str[str.size() - i - 1])
-        return false;
-    return f(i + 1, str);
-}
-bool isPalindrome(string &str)
-{
-    return f(0, str);
-}
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        int i=0, j=s.length()-1;
+        while(i<j){
+            while(i<j and !isalnum(s[i])) i++;
+            while(j>i and !isalnum(s[j])) j--;
 
-int main()
-{
-    string s = "abca";
-    cout << isPalindrome(s) << endl;
+            if(tolower(s[i]) != tolower(s[j])) return false;
+            i++;
+            j--;
+        }
+        return true;
+    }
+};
+
+int main() {
+    Solution sol;
+    string s = "aba";
+    cout << sol.isPalindrome(s) << endl;
     return 0;
 }

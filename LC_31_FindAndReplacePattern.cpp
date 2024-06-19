@@ -8,59 +8,56 @@ using namespace std;
 // mapping[p] = 'a' -> str[0] = mapping[p],
 // mapping[r] = 'b' -> str[1] = mapping[r]
 // thus "prr" gets converted to "abb"
-void createMappingAndUpdateString(string &str)
+class Solution
 {
-    // find mapping
-    char start = 'a';
-    char mapping[256] = {0};
-    for (auto ch : str)
+public:
+    void createMappingAndUpdate(string &s)
     {
-        if (mapping[ch] == 0)
+        unordered_map<char, char> m;
+        char c = 'a';
+        for (auto it : s)
         {
-            mapping[ch] = start;
-            start++;
+            if (!m.count(it))
+            {
+                m[it] = c++;
+            }
+        }
+        for (auto i = 0; i < s.size(); i++)
+        {
+            s[i] = m[s[i]];
         }
     }
 
-    // update the string
-    for (int i = 0; i < str.length(); i++)
+    // Tc: O(N×L) & Sc: O(N*L) where N is the number of words and L is the length of each word.
+    vector<string> findAndReplacePattern(vector<string> &words, string pattern)
     {
-        char ch = str[i];
-        str[i] = mapping[ch];
-    }
-}
+        string p = pattern;
+        createMappingAndUpdate(p);
+        vector<string> ans;
 
-// tc: O(n*m) & sc: O(m), where n = words.size() and m = temp.size()
-vector<string> findAndReplacePattern(vector<string> &words, string pattern)
-{
-    vector<string> ans;
-    // first normalize the pattern
-    createMappingAndUpdateString(pattern);
-
-    // check if any word matches the newly mapped pattern
-    for (string s : words)
-    {
-        string temp = s;
-
-        // normalize temp string to match with the pattern
-        createMappingAndUpdateString(temp);
-        if (temp == pattern)
+        for (string s : words)
         {
-            // this means the current string is a valid match
-            ans.push_back(s);
+            string copy = s;
+            createMappingAndUpdate(copy);
+
+            if (copy == p)
+            {
+                ans.push_back(s);
+            }
         }
+        return ans;
     }
-    return ans;
-}
+};
 
 int main()
 {
+    Solution s;
     vector<string> words = {"abc", "deq", "mee", "aqq", "dkd", "ccc"};
     string pattern = "abb";
-    vector<string> ans = findAndReplacePattern(words, pattern);
-    for (string s : ans)
+    vector<string> res = s.findAndReplacePattern(words, pattern);
+    for (string str : res)
     {
-        cout << s << " ";
+        cout << str << " ";
     }
     cout << endl;
     return 0;

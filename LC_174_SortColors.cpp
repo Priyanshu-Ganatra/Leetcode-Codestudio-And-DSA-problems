@@ -6,22 +6,23 @@ public:
     // tc : O(n), sc : O(1)
     void sortColors(vector<int>& arr) {
         int n = arr.size();
-        int low = 0, mid = 0, high = n - 1;
-        while (mid <= high)
-        {
-            if (arr[mid] == 0)
-            {
-                swap(arr[mid], arr[low]);
-                low++;
-                mid++;
+        int i = 0, j = 0, k = n - 1;
+
+        // j <= k and not j < k because what if j & k are on the same index 
+        // and I need to perform a swap to complete the sorting
+        // try to dry run nums = [2, 0, 1] with the loop condition of j < k
+        while (j <= k) {
+            if(arr[j] == 0){
+                swap(arr[j], arr[i]);
+                i++;
+                j++;
             }
-            else if (arr[mid] == 1)
-                mid++;
+            else if(arr[j] == 2){
+                swap(arr[j], arr[k]);
+                k--;
+            }
             else
-            {
-                swap(arr[mid], arr[high]);
-                high--;
-            }
+                j++;
         }
     }
 };

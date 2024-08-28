@@ -35,19 +35,23 @@ public:
         // return -1;
 
         // tc: O(n) & sc(1)
-        int totalWeightOnLeft = 0;
-        int totalWeightOnRight = accumulate(nums.begin(), nums.end(), 0);
-        for (int i = 0; i < nums.size(); i++)
-        {
-            int currentWeight = nums[i];
-            totalWeightOnRight -= currentWeight;
-            if (totalWeightOnLeft == totalWeightOnRight)
-            {
-                // balance is met on both sides
-                return i;
-            }
-            totalWeightOnLeft += currentWeight;
+        int n = nums.size();
+        vector<int> lsum(n, 0);
+        vector<int> rsum(n, 0);
+
+        for (int i = 1; i < n; i++) {
+            lsum[i] = lsum[i - 1] + nums[i - 1];
         }
+
+        for (int i = n - 2; i >= 0; i--) {
+            rsum[i] = rsum[i + 1] + nums[i + 1];
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (lsum[i] == rsum[i])
+                return i;
+        }
+
         return -1;
     }
 };

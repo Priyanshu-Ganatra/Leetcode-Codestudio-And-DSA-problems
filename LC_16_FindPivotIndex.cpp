@@ -34,7 +34,7 @@ public:
         // }
         // return -1;
 
-        // tc: O(n) & sc(1)
+        // tc: O(n) & sc(n)
         int n = nums.size();
         vector<int> lsum(n, 0);
         vector<int> rsum(n, 0);

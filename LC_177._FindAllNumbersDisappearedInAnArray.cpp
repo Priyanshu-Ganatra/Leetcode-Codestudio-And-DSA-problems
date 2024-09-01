@@ -1,28 +1,40 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Solution
-{
+class Solution {
 public:
-    // tc: O(n), sc: O(1)
-    vector<int> findDisappearedNumbers(vector<int> &a)
-    {
-        int i = 0, n = a.size();
+    vector<int> findDisappearedNumbers(vector<int>& a) {
         vector<int> ans;
-        while (i < n)
-        {
-            if (a[i] != a[a[i] - 1])
-                swap(a[i], a[a[i] - 1]);
-            else
+        int n = a.size();
+
+        // -ve marking method i,e. visiting method
+        // tc: O(n) and sc: O(1)
+        // for (int i = 0; i < n; i++) {
+        //     int idx = abs(a[i]);
+        //     if (a[idx - 1] > 0) {
+        //         a[idx - 1] *= -1;
+        //     }
+        // }
+        // for (int i = 0; i < n; i++) {
+        //     if (a[i] > 0)
+        //         ans.push_back(i + 1);
+        // }
+
+        // sort + swap method
+        // tc: O(n) and sc: O(1)
+        int i = 0;
+        while (i < n) {
+            int idx = a[i] - 1;
+            if (a[i] != a[idx]) {
+                swap(a[i], a[idx]);
+            } else
                 i++;
         }
-        i = 0;
-        while (i < n)
-        {
+        for (int i = 0; i < n; i++) {
             if (a[i] != i + 1)
                 ans.push_back(i + 1);
-            i++;
         }
+
         return ans;
     }
 };

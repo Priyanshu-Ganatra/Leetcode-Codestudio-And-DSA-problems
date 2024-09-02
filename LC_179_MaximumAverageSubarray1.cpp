@@ -1,52 +1,41 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Solution
-{
+class Solution {
 public:
-    // TC: O(n square)
-    double bruteForceSol(vector<int> &nums, int &k)
-    {
+    // TC: O(n^2)
+    double bruteForceSol(vector<int>& nums, int& k) {
         int maxSum = INT_MIN;
         int i = 0, j = k - 1;
-        while (j < nums.size())
-        {
+        while (j < nums.size()) {
             int sum = 0;
-            for (int y = i; y <= j; y++)
-            {
-                sum += nums[y];
-            }
+            sum = accumulate(nums.begin() + i, nums.begin() + j + 1, 0);
             maxSum = max(maxSum, sum);
             i++, j++;
         }
-        double maxAvg = maxSum / (double)k;
-        return maxAvg;
+        
+        return maxSum / (double)k;
     }
 
     // TC: O(n)
-    double slidingWindowSol(vector<int> &nums, int &k)
-    {
+    double slidingWindowSol(vector<int>& nums, int& k) {
         int i = 0, j = k - 1;
-        int sum = 0;
-        for (int y = i; y <= j; ++y)
-        {
-            sum += nums[y];
-        }
+        int sum = accumulate(nums.begin() + i, nums.begin() + j + 1, 0);
+
         int maxSum = sum;
-        j++;
-        while (j < nums.size())
-        {
+        while (j < nums.size()) {
+            if (j + 1 == nums.size())
+                break;
             sum -= nums[i++];
-            sum += nums[j++];
+            sum += nums[++j];
             maxSum = max(maxSum, sum);
         }
 
-        double maxAvg = maxSum / (double)k;
-        return maxAvg;
+        return maxSum / (double)k;
     }
 
-    double findMaxAverage(vector<int> &nums, int k)
-    {
+    double findMaxAverage(vector<int>& nums, int k) {
+        // return bruteForceSol(nums, k);
         return slidingWindowSol(nums, k);
     }
 };

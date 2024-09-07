@@ -20,8 +20,8 @@ public:
     // tc : O(n), sc : O(1)
     void method2(vector<int> &nums, int n, int k)
     {
-        reverse(nums.begin(), nums.begin() + n - k);
-        reverse(nums.begin() + n - k, nums.begin() + n);
+        reverse(nums.begin(), nums.end() - k);
+        reverse(nums.end() - k, nums.end());
         reverse(nums.begin(), nums.end());
     }
 

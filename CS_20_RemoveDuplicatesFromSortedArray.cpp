@@ -1,26 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int removeDuplicates(vector<int> &arr, int n)
-{
-    // remember the array is sorted
-    int i = 0;
-    for (int j = 1; j < n; j++)
-    {
-        // if we find an element not equal to previous unique element, we do the in-place change
-        // of the newly found element one place after the previously found unique element
-        // and now the newly found unique element becomes the previously found unique element
-        // for further searching of another unique element if there exists one
-        if (arr[i] != arr[j])
-        {
-            arr[i + 1] = arr[j];
-            i++;
-        }
+int removeDuplicates(vector<int>& a) {
+    int i = 1, j = 0, n = a.size();
+    while (i < n) {
+        if (a[i] == a[j]) i++;
+        else swap(a[++j], a[i++]);
     }
-    // In the end, the i pointer would be standing at a position where the last unique element
-    // stands, and since the index starts with 0 and we want the no. of unique elements in the
-    // array, we return (i+1)
-    return (i + 1);
+    return j + 1;
 }
 
 int main()

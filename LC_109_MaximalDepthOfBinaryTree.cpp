@@ -32,26 +32,31 @@ public:
     // using level order traversal
     int maxDepth(TreeNode *root)
     {
-        if (root == NULL)
-            return 0;
-        queue<TreeNode *> q;
+        // dfs
+        // if(!root) return 0;
+        // int leftHeight = maxDepth(root->left);
+        // int rightHeight = maxDepth(root->right);
+        // return max(leftHeight, rightHeight) + 1;
+
+        // bfs
+        if(!root) return 0;
+        queue<TreeNode*> q;
         q.push(root);
-        int height = 0;
-        while (!q.empty())
-        {
+        int c = 0;
+
+        while (!q.empty()) {
             int s = q.size();
-            for (int i = 0; i < s; i++)
-            {
-                TreeNode *node = q.front();
+            c++;
+            for (int i = 0; i < s; i++) {
+                TreeNode* node = q.front();
                 q.pop();
                 if (node->left != NULL)
                     q.push(node->left);
                 if (node->right != NULL)
                     q.push(node->right);
             }
-            height++;
         }
-        return height;
+        return c;
     }
 };
 

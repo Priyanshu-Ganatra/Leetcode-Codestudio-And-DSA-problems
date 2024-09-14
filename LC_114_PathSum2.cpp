@@ -11,28 +11,20 @@ struct TreeNode
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-void solve(TreeNode *root, int targetSum, vector<vector<int>> &paths, vector<int> &path, int sum)
+void solve(TreeNode *root, int targetSum, vector<vector<int>> &paths, vector<int> path,
+           int sum)
 {
     // base case
-    if (root == nullptr)
-    {
+    if (!root)
         return;
-    }
-
     sum += root->val;
     path.push_back(root->val);
 
     // leaf node
-    if (root->left == nullptr && root->right == nullptr && targetSum == sum)
-    {
+    if (!root->left && !root->right && targetSum == sum)
         paths.push_back(path);
-    }
-
     solve(root->left, targetSum, paths, path, sum);
     solve(root->right, targetSum, paths, path, sum);
-
-    // backtrack
-    path.pop_back();
 }
 
 // tc : O(n) sc : O(n)

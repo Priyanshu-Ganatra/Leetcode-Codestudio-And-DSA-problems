@@ -11,35 +11,21 @@ struct TreeNode
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-bool solve(TreeNode *&root, int &targetSum, int sum)
+bool solve(TreeNode *root, int &targetSum, int sum)
 {
-    // base case
-    if (root == NULL)
-    {
+    if (!root)
         return false;
-    }
 
     sum += root->val;
-    if (root->left == NULL && root->right == NULL)
-    {
-        // currently at leaf node
-        // verify
-        if (sum == targetSum)
-            return true;
-        else
-            return false;
-    }
-
-    bool leftAns = solve(root->left, targetSum, sum);
-    bool rightAns = solve(root->right, targetSum, sum);
-    return leftAns || rightAns;
+    if (!root->left && !root->right)
+        return (sum == targetSum);
+    return solve(root->left, targetSum, sum) || solve(root->right, targetSum, sum);
 }
 
 bool hasPathSum(TreeNode *root, int targetSum)
 {
     int sum = 0;
-    bool ans = solve(root, targetSum, sum);
-    return ans;
+    return solve(root, targetSum, sum);
 }
 
 int main()

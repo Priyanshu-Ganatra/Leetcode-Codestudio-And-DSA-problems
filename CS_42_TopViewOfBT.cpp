@@ -19,6 +19,7 @@ public:
 
 vector<int> getTopView(TreeNode<int> *root)
 {
+    // hd means horizontal distance which is nothing but the x-coordinate of the node (or we can say it's a vertical level)
     map<int, int> hdToNode;
     queue<pair<TreeNode<int> *, int>> q;
     q.push({root, 0});
@@ -31,17 +32,17 @@ vector<int> getTopView(TreeNode<int> *root)
         int hd = temp.second;
 
         // if no entry for this hd exists, then add it in the map
-        if (hdToNode.find(hd) == hdToNode.end())
+        if (!hdToNode[hd])
         {
             hdToNode[hd] = frontNode->data;
         }
 
         // children
-        if (frontNode->left != NULL)
+        if (frontNode->left)
         {
             q.push({frontNode->left, hd - 1});
         }
-        if (frontNode->right != NULL)
+        if (frontNode->right)
         {
             q.push({frontNode->right, hd + 1});
         }
